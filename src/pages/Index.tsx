@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Wrench, Gauge, Zap, Disc3, Battery, Droplets, Wind, Cog, Car,
@@ -9,7 +8,6 @@ import heroImg from "@/assets/hero-garage.jpg";
 import diagnosticsImg from "@/assets/diagnostics.jpg";
 import workshopImg from "@/assets/workshop.jpg";
 
-export const Route = createFileRoute("/")({
   component: Index,
 });
 
