@@ -8,9 +8,6 @@ import heroImg from "@/assets/hero-garage.jpg";
 import diagnosticsImg from "@/assets/diagnostics.jpg";
 import workshopImg from "@/assets/workshop.jpg";
 
-  component: Index,
-});
-
 const SERVICES = [
   { icon: Disc3, name: "ABS & Brakes", desc: "Anti-lock brake systems and full brake service." },
   { icon: Cpu, name: "Computer Diagnostics", desc: "AI-assisted multi-system electronic diagnostics." },
