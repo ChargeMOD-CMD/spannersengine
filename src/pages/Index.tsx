@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Wrench, Gauge, Zap, Disc3, Battery, Droplets, Wind, Cog, Car,
@@ -8,10 +7,6 @@ import {
 import heroImg from "@/assets/hero-garage.jpg";
 import diagnosticsImg from "@/assets/diagnostics.jpg";
 import workshopImg from "@/assets/workshop.jpg";
-
-export const Route = createFileRoute("/")({
-  component: Index,
-});
 
 const SERVICES = [
   { icon: Disc3, name: "ABS & Brakes", desc: "Anti-lock brake systems and full brake service." },
@@ -523,3 +518,5 @@ function Index() {
     </div>
   );
 }
+
+export default Index;
