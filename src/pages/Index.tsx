@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Wrench, Gauge, Zap, Disc3, Battery, Droplets, Wind, Cog, Car,
   Phone, MessageCircle, MapPin, Clock, Mail, ArrowRight, Sparkles,
-  ShieldCheck, Cpu, Activity, Star, Send,
+  ShieldCheck, Cpu, Activity, Star, Send, Menu, X,
 } from "lucide-react";
 import heroImg from "@/assets/hero-garage.jpg";
 import diagnosticsImg from "@/assets/diagnostics.jpg";
@@ -76,15 +76,19 @@ function CursorGlow() {
 }
 
 function Nav() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/50">
+    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2 group">
           <div className="relative h-9 w-9 rounded-md bg-gradient-fire grid place-items-center shadow-fire">
             <Wrench className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
           </div>
-          <span className="font-display text-xl tracking-wider">SPANNERS</span>
+          <span className="font-display text-xl tracking-wider hidden sm:inline-block">SPANNERS</span>
         </a>
+        
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           {["Services", "Package", "Diagnostics", "Brands", "Contact"].map((l) => (
             <a key={l} href={`#${l.toLowerCase()}`} className="text-muted-foreground hover:text-primary transition-colors">
@@ -92,13 +96,43 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <a
-          href="tel:+917025339080"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-fire px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-fire hover:scale-105 transition-transform"
-        >
-          <Phone className="h-4 w-4" /> Book Service
-        </a>
+        
+        <div className="flex items-center gap-4">
+          <a
+            href="tel:+917025339080"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-fire px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-primary-foreground shadow-fire hover:scale-105 transition-transform"
+          >
+            <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> Book Service
+          </a>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border shadow-lg">
+          <nav className="flex flex-col py-4 px-6 gap-4">
+            {["Services", "Package", "Diagnostics", "Brands", "Contact"].map((l) => (
+              <a 
+                key={l} 
+                href={`#${l.toLowerCase()}`} 
+                className="text-lg font-medium text-muted-foreground hover:text-primary py-2 border-b border-border/50 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {l}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -445,18 +479,18 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border py-12 bg-gradient-night">
-      <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-md bg-gradient-fire grid place-items-center shadow-fire">
-            <Wrench className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+    <footer className="border-t border-border py-10 sm:py-12 bg-gradient-night">
+      <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="h-12 w-12 sm:h-10 sm:w-10 rounded-md bg-gradient-fire grid place-items-center shadow-fire shrink-0">
+            <Wrench className="h-6 w-6 sm:h-5 sm:w-5 text-primary-foreground" strokeWidth={2.5} />
           </div>
           <div>
-            <div className="font-display text-xl tracking-wider">SPANNERS ALL CAR SERVICE</div>
-            <div className="text-xs text-muted-foreground">Precision Repairs. Powerful Performance.</div>
+            <div className="font-display text-2xl sm:text-xl tracking-wider mb-1 sm:mb-0">SPANNERS ALL CAR SERVICE</div>
+            <div className="text-sm sm:text-xs text-muted-foreground">Precision Repairs. Powerful Performance.</div>
           </div>
         </div>
-        <div className="text-sm text-muted-foreground">© {new Date().getFullYear()} Spanners. All rights reserved.</div>
+        <div className="text-sm text-muted-foreground mt-4 md:mt-0">© {new Date().getFullYear()} Spanners. All rights reserved.</div>
       </div>
     </footer>
   );
